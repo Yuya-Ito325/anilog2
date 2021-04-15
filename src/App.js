@@ -3,53 +3,57 @@ import axios from 'axios'
 
 
 
-function YearButton(){
+function YearButton(props){
+
+
+  const doChange = (e) =>{
+    props.setYear(e.target.value)
+    console.log(e.target.value)
+    console.log(e.value)
+  }
+
+  const years = [2021,2020,2019,2018,2017,2016,2015,2014]
+  
+
   return(
     <>
-      <button>2021</button>
-      <button>2020</button>
-      <button>2019</button>
-      <button>2018</button>
-      <button>2017</button>
-      <button>2016</button>
-      <button>2015</button>
-      <button>2014</button>
+    {years.map((year) => (
+    <button value = {year} onClick = {(e) => doChange(e)}>{year}</button>
+    ))}
     </>
   )
 }
 
 
 
-function SeasonButton(){
+function SeasonButton(props){
+
+
+  const doChange = (e) =>{
+    props.setSeason(e.target.value)
+  }
+
+  const seasons = ["冬","春","夏","秋"]
+
   return(
     <>
-      <button>冬</button>
-      <button>春</button>
-      <button>夏</button>
-      <button>秋</button>
+    {seasons.map((season,i) => (
+    <button value = {`/${i+1}`} onClick = {(e)=>doChange(e)}>{season}</button>
+    ))}
     </>
   )
 }
 
 
 
-function AnimeList(){
+function AnimeList(props){
 
-  const [post , setPost] = useState([])
-
-  //apiデータ読み取り
-  useEffect(() => {
-    axios.get('http://api.moemoe.tokyo/anime/v1/master/2021')
-    .then(res => {
-      setPost(res.data)
-      console.log(post)
-    })
-  }, [])
+  
 
   //list表示
   return(
     <ul>
-      {post.map((value) =>(
+      {props.post.map((value) =>(
         <li>{value.title}</li>
       ))}
     </ul>
@@ -73,12 +77,27 @@ function ViewAnimeList(){
 
 function App() {
 
+  const [post, setPost] = useState([])
+  const [year , setYear]     = useState('')
+  const [season , setSeason] = useState('')
+
+
+  //apiデータ読み取り
+  useEffect(() => {
+    axios.get(`http://api.moemoe.tokyo/anime/v1/master/${year}${season}`)
+    .then(res => {
+      setPost(res.data)
+      console.log(post)
+    })
+  }, [year,season])
+
+
   return ( 
   <>
     <h1>anilog2</h1>
-    <YearButton />
-    <SeasonButton/>
-    <AnimeList/>
+    <YearButton  setYear={setYear}/>
+    <SeasonButton setSeason={setSeason}/>
+    <AnimeList post={post}/>
     <h1>試聴予定リスト</h1>
     <ViewAnimeList/>
   </>
