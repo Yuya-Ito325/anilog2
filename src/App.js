@@ -8,8 +8,6 @@ function YearButton(props){
 
   const doChange = (e) =>{
     props.setYear(e.target.value)
-    console.log(e.target.value)
-    console.log(e.value)
   }
 
   const years = [2021,2020,2019,2018,2017,2016,2015,2014]
@@ -48,13 +46,26 @@ function SeasonButton(props){
 
 function AnimeList(props){
 
-  
+
+
+  const doChange = (e) => {
+    let copyAnimeList = [...props.animeName]
+    if(copyAnimeList.includes(e.target.value) != true){
+    copyAnimeList.push(e.target.value)
+    props.setAnimeName(copyAnimeList)
+    }else{
+      return
+    }
+  }
 
   //list表示
   return(
     <ul>
       {props.post.map((value) =>(
-        <li>{value.title}</li>
+        <>
+         <li>{value.title}</li>
+         <button value = {value.title} onClick = {(e)=>doChange(e)}>追加</button>
+        </>
       ))}
     </ul>
   )
@@ -63,13 +74,24 @@ function AnimeList(props){
 
 
 
-function ViewAnimeList(){
-  return(
-    <>
-      <ul>
+function ViewAnimeList(props){
 
+  const doChange = (e) => {
+    let copyAnimeList = [...props.animeName]
+    copyAnimeList.splice(copyAnimeList.indexOf(e.target.value), 1)
+    props.setAnimeName(copyAnimeList)
+  }
+
+
+  return(
+      <ul>
+        {props.animeName.map((value) =>(
+          <>
+            <li>{value}</li>
+            <button value = {value} onClick = {(e)=>doChange(e)}>削除</button>
+          </>
+        ))}
       </ul>
-    </>
   )
 }
 
@@ -80,6 +102,7 @@ function App() {
   const [post, setPost] = useState([])
   const [year , setYear]     = useState('')
   const [season , setSeason] = useState('')
+  const [animeName , setAnimeName] = useState([])
 
 
   //apiデータ読み取り
@@ -87,19 +110,19 @@ function App() {
     axios.get(`http://api.moemoe.tokyo/anime/v1/master/${year}${season}`)
     .then(res => {
       setPost(res.data)
-      console.log(post)
     })
   }, [year,season])
 
 
+  
   return ( 
   <>
     <h1>anilog2</h1>
     <YearButton  setYear={setYear}/>
     <SeasonButton setSeason={setSeason}/>
-    <AnimeList post={post}/>
+    <AnimeList post={post} animeName={animeName} setAnimeName={setAnimeName}/>
     <h1>試聴予定リスト</h1>
-    <ViewAnimeList/>
+    <ViewAnimeList animeName={animeName} setAnimeName={setAnimeName}/>
   </>
   )
 }
