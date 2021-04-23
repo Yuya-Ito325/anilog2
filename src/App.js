@@ -124,7 +124,7 @@ function App() {
 
   //apiデータ読み取り
   useEffect(() => {
-    axios.get(`http://api.moemoe.tokyo/anime/v1/master/${year}${season}`)
+    axios.get(`https://api.moemoe.tokyo/anime/v1/master/${year}${season}`)
     .then(res => {
       setPost(res.data)
     })
