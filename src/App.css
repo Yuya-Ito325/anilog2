@@ -1,38 +1,148 @@
-.App {
-  text-align: center;
+.body {
+  height: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header {
+  background-color: #0c96c9;
+  height: 80px;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.header span {
+  color: white;
+  font-size: 50px;
+  font-weight: bold;
+  cursor: default;
+}
+
+.header span:hover {
+  animation: logoAnimation 1s forwards;
+}
+
+@keyframes logoAnimation {
+  100% {
+    transform: translateY(-70px);
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.button_content {
+  background-color: white;
+  height: 70px;
+  width: auto;
+  margin-top: 3px;
+}
+
+.year_button {
+  display: flex;
+  justify-content: space-around;
+}
+
+.year_button button {
+  width: 80px;
+  background-color: white;
+  color: #0c96c9;
+  border: #0c96c9 2px solid;
+  border-radius: 15px;
+  transition: color 0.3s;
+  transition: border 0.2s;
+  outline: none;
+}
+
+.year_button button:hover {
+  color: #ef7d0b;
+  border: #ef7d0b 2px solid;
+}
+
+.season_button {
+  display: flex;
+  justify-content: space-around;
+}
+
+.season_button button {
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  color: #0c96c9;
+  border: #0c96c9 2px solid;
+  border-radius: 100%;
+  transition: color 0.1s;
+  transition: border 0.1s;
+  outline: none;
+}
+
+.season_button button:hover {
+  color: #ef7d0b;
+  border: #ef7d0b 2px solid;
+}
+
+.anime_list {
+  height: 265px;
+  width: auto;
+  background-color: #0c96c9;
+  overflow: scroll;
+  border-top: 3px #0c96c9 solid;
+  border-bottom: 3px #0c96c9 solid;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  list-style: none;
+}
+
+.anime_name_content {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: white 1px solid;
+  transition: border-bottom 0.1s;
+}
+
+.anime_name_content:hover {
+  border-bottom: #ef7d0b 1px solid;
+}
+
+.anime_name_content li {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.anime_name_content button {
+  background-color: white;
+  color: #0c96c9;
+  font-weight: bold;
+  width: 80px;
+  border: #0c96c9 2px solid;
+  border-radius: 15px;
+  transition: color 0.1s;
+  transition: border 0.1s;
+  outline: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.anime_name_content button:hover {
+  color: #ef7d0b;
+  border: #ef7d0b 2px solid;
+}
+
+.view_anime_list {
+  height: 265px;
+  width: auto;
+  background-color: #0c96c9;
+  overflow: scroll;
+  border-top: 3px #0c96c9 solid;
+  border-bottom: 3px #0c96c9 solid;
+  list-style: none;
+}
+
+.menu_title {
+  background-color: white;
+  height: 80px;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu_title h1 {
+  color: #0c96c9;
+  font-size: 15pxpx;
+  font-weight: bold;
 }

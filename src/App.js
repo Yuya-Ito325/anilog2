@@ -1,7 +1,20 @@
-import React, {useState, useEffect} from 'react'
-import axios from 'axios'
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import './App.css';
 
 
+function TitleLogo(){
+  return(
+    <h1 className="header">
+      <span>a</span>
+      <span>n</span>
+      <span>i</span>
+      <span>l</span>
+      <span>o</span>
+      <span>g</span>
+    </h1>
+  )
+}
 
 function YearButton(props){
 
@@ -14,11 +27,11 @@ function YearButton(props){
   
 
   return(
-    <>
-    {years.map((year) => (
-    <button value = {year} onClick = {(e) => doChange(e)}>{year}</button>
-    ))}
-    </>
+    <div className="year_button">
+      {years.map((year) => (
+        <button  value = {year} onClick = {(e) => doChange(e)}>{year}</button>
+      ))}
+    </div>
   )
 }
 
@@ -34,11 +47,11 @@ function SeasonButton(props){
   const seasons = ["冬","春","夏","秋"]
 
   return(
-    <>
-    {seasons.map((season,i) => (
-    <button value = {`/${i+1}`} onClick = {(e)=>doChange(e)}>{season}</button>
-    ))}
-    </>
+    <div className="season_button">
+     {seasons.map((season,i) => (
+      <button value = {`/${i+1}`} onClick = {(e)=>doChange(e)}>{season}</button>
+     ))}
+    </div>
   )
 }
 
@@ -51,8 +64,8 @@ function AnimeList(props){
   const doChange = (e) => {
     let copyAnimeList = [...props.animeName]
     if(copyAnimeList.includes(e.target.value) != true){
-    copyAnimeList.push(e.target.value)
-    props.setAnimeName(copyAnimeList)
+      copyAnimeList.push(e.target.value)
+      props.setAnimeName(copyAnimeList)
     }else{
       return
     }
@@ -60,12 +73,12 @@ function AnimeList(props){
 
   //list表示
   return(
-    <ul>
+    <ul className="anime_list">
       {props.post.map((value) =>(
-        <>
+        <div className="anime_name_content">
          <li>{value.title}</li>
-         <button value = {value.title} onClick = {(e)=>doChange(e)}>追加</button>
-        </>
+         <button className="list_button" value = {value.title} onClick = {(e)=>doChange(e)}>追加</button>
+        </div>
       ))}
     </ul>
   )
@@ -84,12 +97,12 @@ function ViewAnimeList(props){
 
 
   return(
-      <ul>
+      <ul className="view_anime_list">
         {props.animeName.map((value) =>(
-          <>
+          <div className="anime_name_content">
             <li>{value}</li>
             <button value = {value} onClick = {(e)=>doChange(e)}>削除</button>
-          </>
+          </div>
         ))}
       </ul>
   )
@@ -116,14 +129,16 @@ function App() {
 
   
   return ( 
-  <>
-    <h1>anilog2</h1>
-    <YearButton  setYear={setYear}/>
-    <SeasonButton setSeason={setSeason}/>
+  <div className="body">
+    <TitleLogo/>
+    <div className="button_content">
+      <YearButton setYear={setYear}/>
+      <SeasonButton setSeason={setSeason}/>
+    </div>
     <AnimeList post={post} animeName={animeName} setAnimeName={setAnimeName}/>
-    <h1>試聴予定リスト</h1>
+    <div className="menu_title"><h1>視聴予定リスト</h1></div>
     <ViewAnimeList animeName={animeName} setAnimeName={setAnimeName}/>
-  </>
+  </div>
   )
 }
 
