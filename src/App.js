@@ -18,18 +18,18 @@ function TitleLogo(){
 
 function YearButton(props){
 
+  const years = [2021,2020,2019,2018,2017,2016,2015,2014];
+  const [yearIndex, setYearIndex] = useState(null);
 
-  const doChange = (e) =>{
-    props.setYear(e.target.value)
+  const doChange = (e, index) =>{
+    props.setYear(e.target.value);
+    setYearIndex(index);
   }
-
-  const years = [2021,2020,2019,2018,2017,2016,2015,2014]
-  
 
   return(
     <div className="year_button">
-      {years.map((year) => (
-        <button  value = {year} onClick = {(e) => doChange(e)}>{year}</button>
+      {years.map((year, i) => (
+        <button key={i} className={yearIndex !== null && yearIndex === i ? 'on' : 'off'}  value = {year} onClick = {(e) => doChange(e,i)}>{year}</button>
       ))}
     </div>
   )
@@ -39,17 +39,21 @@ function YearButton(props){
 
 function SeasonButton(props){
 
+  const seasons = ["冬","春","夏","秋"];
+  const [seasonIndex, setSeasonIndex] = useState(null);
 
-  const doChange = (e) =>{
+
+  const doChange = (e, index) =>{
     props.setSeason(e.target.value)
+    setSeasonIndex(index)
   }
 
-  const seasons = ["冬","春","夏","秋"]
+  
 
   return(
     <div className="season_button">
-     {seasons.map((season,i) => (
-      <button value = {`/${i+1}`} onClick = {(e)=>doChange(e)}>{season}</button>
+     {seasons.map((season, i) => (
+      <button key={i} className={seasonIndex !== null && seasonIndex === i ? 'on' : 'off'} value = {`/${i+1}`} onClick = {(e)=>doChange(e,i)}>{season}</button>
      ))}
     </div>
   )
@@ -63,7 +67,7 @@ function AnimeList(props){
 
   const doChange = (e) => {
     let copyAnimeList = [...props.animeName]
-    if(copyAnimeList.includes(e.target.value) != true){
+    if(copyAnimeList.includes(e.target.value) !== true){
       copyAnimeList.push(e.target.value)
       props.setAnimeName(copyAnimeList)
     }else{
@@ -112,10 +116,10 @@ function ViewAnimeList(props){
 
 function App() {
 
-  const [post, setPost] = useState([])
-  const [year , setYear]     = useState('')
-  const [season , setSeason] = useState('')
-  const [animeName , setAnimeName] = useState([])
+  const [post, setPost] = useState([]);
+  const [year , setYear]     = useState('');
+  const [season , setSeason] = useState('');
+  const [animeName , setAnimeName] = useState([]);
 
 
   //apiデータ読み取り
