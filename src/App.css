@@ -56,6 +56,11 @@
   border: #ef7d0b 2px solid;
 }
 
+.year_button .on {
+  color: #ef7d0b;
+  border: #ef7d0b 2px solid;
+}
+
 .season_button {
   display: flex;
   justify-content: space-around;
@@ -78,6 +83,10 @@
   border: #ef7d0b 2px solid;
 }
 
+.season_button .on {
+  color: #ef7d0b;
+  border: #ef7d0b 2px solid;
+}
 .anime_list {
   height: 265px;
   width: auto;
