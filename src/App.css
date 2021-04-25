@@ -152,6 +152,20 @@
 
 .menu_title h1 {
   color: #0c96c9;
-  font-size: 15pxpx;
+  font-size: 15px;
   font-weight: bold;
+}
+
+@media screen and (max-width: 414px) {
+  .anime_name_content li {
+    white-space: nowrap;
+    width: 290px;
+    overflow: scroll;
+  }
+
+  .view_anime_list li {
+    white-space: nowrap;
+    width: 290px;
+    overflow: scroll;
+  }
 }
