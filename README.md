@@ -14,3 +14,6 @@ React
 
 ## 使用API
 https://github.com/Project-ShangriLa/sora-playframework-scala
+
+## AppUrl
+https://anilog-yui.herokuapp.com/
