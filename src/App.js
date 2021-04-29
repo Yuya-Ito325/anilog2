@@ -78,8 +78,8 @@ function AnimeList(props){
   //list表示
   return(
     <ul className="anime_list">
-      {props.post.map((value) =>(
-        <div className="anime_name_content">
+      {props.post.map((value, i) =>(
+        <div key={i} className="anime_name_content">
          <li>{value.title}</li>
          <button className="list_button" value = {value.title} onClick = {(e)=>doChange(e)}>追加</button>
         </div>
@@ -102,8 +102,8 @@ function ViewAnimeList(props){
 
   return(
       <ul className="view_anime_list">
-        {props.animeName.map((value) =>(
-          <div className="anime_name_content">
+        {props.animeName.map((value, i) =>(
+          <div key={i} className="anime_name_content">
             <li>{value}</li>
             <button value = {value} onClick = {(e)=>doChange(e)}>削除</button>
           </div>
